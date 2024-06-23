@@ -1,28 +1,41 @@
 package com.example.resort_unipar.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.time.LocalDateTime;
 
+@Entity
 public class Reserva {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Cliente cliente;
-    private Quarto quarto;
+    private String clienteCpf;
     private LocalDateTime checkin;
     private LocalDateTime checkout;
     private StatusReserva status;
 
-    public Reserva(Integer id,Cliente cliente, Quarto quarto, LocalDateTime checkin, LocalDateTime checkout) {
-        if (cliente.getIdade() < 18) {
-            throw new IllegalArgumentException("O cliente deve ser maior de idade.");
-        }
+    public Reserva(Long clienteId, Long quartoId,String clienteCpf, LocalDateTime checkin, LocalDateTime checkout) {
         if (checkout.isBefore(checkin.plusDays(2))) {
             throw new IllegalArgumentException("A reserva deve ser de no mínimo 2 dias.");
         }
-        this.id = id;
-        this.cliente = cliente;
-        this.quarto = quarto;
+        this.clienteCpf = clienteCpf;
         this.checkin = checkin;
         this.checkout = checkout;
         this.status = StatusReserva.PENDENTE;
+    }
+
+
+    public Reserva(Integer id, Long clienteId, Long quartoId, LocalDateTime checkinDate, LocalDateTime checkoutDate) {
+    }
+
+    public Reserva() {
+
+    }
+
+    public Reserva(Long o, Cliente cliente, Quarto quarto, LocalDateTime checkin, LocalDateTime checkout) {
     }
 
     public Integer getId() {
@@ -33,20 +46,12 @@ public class Reserva {
         this.id = id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getClienteCpf() {
+        return clienteCpf;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Quarto getQuarto() {
-        return quarto;
-    }
-
-    public void setQuarto(Quarto quarto) {
-        this.quarto = quarto;
+    public void setClienteCpf(String clienteCpf) {
+        this.clienteCpf = clienteCpf;
     }
 
     public LocalDateTime getCheckin() {

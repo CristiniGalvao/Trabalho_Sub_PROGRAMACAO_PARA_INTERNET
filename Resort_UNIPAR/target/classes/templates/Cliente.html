@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Cliente</title>
+</head>
+<style>
+    body {
+        font-family: "Arial Black", sans-serif;
+        background-color: #ccc;
+        padding: 20px;
+    }
+    .form-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #ece6e6;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-container form {
+        display: flex;
+        flex-direction: column;
+    }
+    .form-container input {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+    .form-container button {
+        padding: 10px;
+        background-color: #38933b;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .form-container button:hover {
+        background-color: #4cae4c;
+    }
+</style>
+</head>
+<body>
+<div class="form-container">
+    <h1>Cadastrar Cliente</h1>
+    <form action="/clientes/form" method="post">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="cpf" placeholder="CPF" required>
+        <input type="text" name="telefone" placeholder="Telefone" required>
+        <input type="text" name="rg" placeholder="RG" required>
+        <input type="number" name="idade" placeholder="Idade" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+    <div th:text="${mensagem}"></div>
+</div>
+</body>
+</html>

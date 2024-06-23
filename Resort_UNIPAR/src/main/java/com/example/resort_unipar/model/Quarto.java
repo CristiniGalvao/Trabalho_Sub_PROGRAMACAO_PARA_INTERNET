@@ -1,6 +1,14 @@
 package com.example.resort_unipar.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Quarto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private int qtdMaxOcupantes;
     private boolean vistaMar;
@@ -16,6 +24,11 @@ public class Quarto {
         this.valor = valor;
         this.descricao = descricao;
     }
+
+    public Quarto() {
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -67,6 +80,11 @@ public class Quarto {
         if (o == null || getClass() != o.getClass()) return false;
         Quarto quarto = (Quarto) o;
         return id == quarto.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
 }

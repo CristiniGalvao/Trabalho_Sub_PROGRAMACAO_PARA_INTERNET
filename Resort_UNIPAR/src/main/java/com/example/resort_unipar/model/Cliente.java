@@ -1,13 +1,21 @@
 package com.example.resort_unipar.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Cliente {
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String cpf;
     private String telefone;
     private String rg;
     private int idade;
-    public Cliente(Integer id, String nome, String cpf, String telefone, String rg, int idade) {
+    public Cliente(Long id, String nome, String cpf, String telefone, String rg, int idade) {
         if (idade < 18) {
             throw new IllegalArgumentException("O cliente deve ser maior de idade.");
         }
@@ -18,11 +26,16 @@ public class Cliente {
         this.rg = rg;
         this.idade = idade;
     }
-    public Integer getId() {
+
+    public Cliente() {
+
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

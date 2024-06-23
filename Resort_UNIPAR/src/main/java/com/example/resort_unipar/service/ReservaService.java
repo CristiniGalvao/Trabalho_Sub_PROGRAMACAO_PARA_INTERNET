@@ -10,7 +10,6 @@ import java.util.List;
 
 @Service
 public class ReservaService {
-
     private final ReservaRepository reservaRepository;
 
     @Autowired
@@ -19,24 +18,22 @@ public class ReservaService {
     }
 
     public Reserva cadastrarReserva(Reserva reserva) {
-        reservaRepository.adicionarReserva(reserva);
-        return reserva;
+        return reservaRepository.save(reserva);
     }
 
     public Reserva atualizarReserva(Reserva reserva) {
-        reservaRepository.atualizarReserva(reserva);
-        return reserva;
+        return reservaRepository.save(reserva);
     }
 
-    public Reserva buscarReservaPorId(Integer id) {
-        return reservaRepository.buscarReservaPorId(id);
+    public Reserva buscarReservaPorId(int id) {
+        return reservaRepository.findById(id).orElse(null);
     }
 
     public List<Reserva> buscarTodasReservasPorHospede(String cpf) {
-        return reservaRepository.buscarTodasReservasPorHospede(cpf);
+        return reservaRepository.findByClienteCpf(cpf);
     }
 
     public List<Reserva> buscarPorDataCheckin(LocalDateTime checkin) {
-        return reservaRepository.buscarPorDataCheckin(checkin);
+        return reservaRepository.findByCheckin(checkin);
     }
 }

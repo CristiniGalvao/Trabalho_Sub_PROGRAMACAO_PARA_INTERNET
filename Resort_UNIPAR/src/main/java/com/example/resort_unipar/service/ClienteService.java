@@ -17,19 +17,18 @@ public class ClienteService {
     }
 
     public Cliente cadastrarCliente(Cliente cliente) {
-        clienteRepository.adicionarCliente(cliente);
-        return cliente;
+        return clienteRepository.save(cliente);
     }
 
     public void atualizarCliente(Cliente cliente) {
-        clienteRepository.atualizarCliente(cliente);
+        clienteRepository.save(cliente);
     }
 
     public Cliente buscarClientePorId(Long id) {
-        return clienteRepository.buscarPorId(id);
+        return clienteRepository.findById(id).orElse(null);
     }
 
     public List<Cliente> buscarTodosClientes() {
-        return clienteRepository.buscarTodos();
+        return clienteRepository.findAll();
     }
 }

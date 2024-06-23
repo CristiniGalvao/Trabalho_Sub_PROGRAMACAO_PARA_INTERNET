@@ -17,32 +17,30 @@ public class QuartoService {
     }
 
     public Quarto cadastrarQuarto(Quarto quarto) {
-        quartoRepository.adicionarQuarto(quarto);
-        return quarto;
+        return quartoRepository.save(quarto);
     }
 
     public Quarto atualizarQuarto(Quarto quarto) {
-        quartoRepository.atualizarQuarto(quarto);
-        return quarto;
+        return quartoRepository.save(quarto);
     }
 
     public Quarto buscarQuartoPorId(int id) {
-        return quartoRepository.buscarPorId(id);
+        return quartoRepository.findById(id).orElse(null);
     }
 
     public List<Quarto> buscarTodosQuartos() {
-        return quartoRepository.buscarTodos();
+        return quartoRepository.findAll();
     }
 
     public List<Quarto> buscarTodosDisponiveis() {
-        return quartoRepository.buscarTodosDisponiveis();
+        return quartoRepository.findByDisponivelTrue();
     }
 
     public List<Quarto> buscarPorQtdOcupantes(int qtdOcupantes) {
-        return quartoRepository.buscarPorQtdOcupantes(qtdOcupantes);
+        return quartoRepository.findByQtdMaxOcupantes(qtdOcupantes);
     }
 
     public List<Quarto> buscarTodosComVistaMarDisponiveis() {
-        return quartoRepository.buscarTodosComVistaMarEDisponiveis();
+        return quartoRepository.findByVistaMarTrueAndDisponivelTrue();
     }
 }
